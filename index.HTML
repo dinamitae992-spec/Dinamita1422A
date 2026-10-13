@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <link rel="imagenes\logo.png" type="png"
+    href="imagenes\logo.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Inventario</title>
+    <link rel="stylesheet" href="style.CSS">
+</head>
+
+<body class="sin-sesion">
+
+<!-- PANTALLA INICIAL -->
+<div id="pantallaInicio" class="pantalla-inicio">
+    <div class="inicio-contenedor">
+        <div class="inicio-logo">iD</div>
+        <h1>mi inventario</h1>
+        <p class="inicio-subtitulo">Selecciona cómo deseas ingresar</p>
+
+        <button type="button" class="btn-inicio btn-administrador" onclick="mostrarLoginAdministrador()">
+            👤 Entrar como administrador
+        </button>
+
+        <button type="button" class="btn-inicio btn-vendedor" onclick="entrarComoVendedor()">
+            🛒 Entrar como vendedor
+        </button>
+
+        <button type="button" class="btn-nuevo-usuario" onclick="mostrarRegistroUsuario()">
+            + Nuevo usuario
+        </button>
+    </div>
+</div>
+
+<!-- LOGIN ADMINISTRADOR -->
+<div id="modalLogin" class="modal-acceso">
+    <div class="acceso-contenido">
+        <button type="button" class="cerrar-acceso" onclick="cerrarAcceso()">&times;</button>
+        <div class="acceso-icono">👤</div>
+        <h2>Entrar como administrador</h2>
+        <p>Ingresa tus datos para continuar</p>
+
+        <form id="formLogin">
+            <label for="loginNombre">Nombre</label>
+            <input type="text" id="loginNombre" placeholder="Escribe tu nombre" required>
+
+            <label for="loginPassword">Contraseña</label>
+            <input type="password" id="loginPassword" placeholder="Escribe tu contraseña" required>
+
+            <button type="submit" class="btn-ingresar">Ingresar</button>
+        </form>
+    </div>
+</div>
+
+<!-- LOGIN VENDEDOR -->
+<div id="modalLoginVendedor" class="modal-acceso">
+    <div class="acceso-contenido">
+        <button type="button" class="cerrar-acceso" onclick="cerrarLoginVendedor()">&times;</button>
+        <div class="acceso-icono">🛒</div>
+        <h2>Entrar como vendedor</h2>
+        <p>Ingresa el nombre y la contraseña que te dio el administrador</p>
+
+        <form id="formLoginVendedor">
+            <label for="loginVendedorNombre">Nombre</label>
+            <input type="text" id="loginVendedorNombre" placeholder="Escribe tu nombre" required>
+
+            <label for="loginVendedorPassword">Contraseña</label>
+            <input type="password" id="loginVendedorPassword" placeholder="Escribe tu contraseña" required>
+
+            <button type="submit" class="btn-ingresar">Ingresar</button>
+        </form>
+    </div>
+</div>
+
+<!-- NUEVO USUARIO -->
+<div id="modalRegistro" class="modal-acceso">
+    <div class="acceso-contenido">
+        <button type="button" class="cerrar-acceso" onclick="cerrarAcceso()">&times;</button>
+        <div class="acceso-icono">📝</div>
+        <h2>Nuevo administrador</h2>
+        <p>Entrarás como administrador del sistema</p>
+
+        <form id="formRegistro">
+            <label for="registroNombre">Nombre</label>
+            <input type="text" id="registroNombre" placeholder="Escribe tu nombre" required>
+
+            <label for="registroPassword">Contraseña</label>
+            <input type="password" id="registroPassword" placeholder="Crea una contraseña" required>
+
+            <p class="mensaje-tipo-usuario">👤 Entrarás como administrador</p>
+            <input type="hidden" id="registroTipo" value="administrador">
+
+            <button type="submit" class="btn-ingresar">Registrar</button>
+        </form>
+    </div>
+</div>
+
+<!-- HEADER -->
+<header class="header">
+    <div class="logo-box"><span>iD</span></div>
+    <div class="title-box"><h1>mi inventario</h1></div>
+    <div id="infoUsuarioHeader" class="info-usuario-header"></div>
+</header>
+
+<div class="sistema">
+    <!-- MENÚ LATERAL -->
+    <nav class="menu">
+        <button class="menu-btn active" onclick="mostrarSeccion('ventas', this)">💰 Ventas</button>
+        <button class="menu-btn" onclick="mostrarSeccion('recursos', this)">📈 Recursos</button>
+        <button class="menu-btn" onclick="mostrarSeccion('demanda', this)">📊 Demanda</button>
+        <button class="menu-btn" onclick="mostrarSeccion('administracion', this)">⚙️ Administración</button>
+        <button class="menu-btn" onclick="mostrarSeccion('notasVenta', this)">🧾 Notas de venta</button>
+        <button class="menu-btn btn-cerrar-sesion" onclick="cerrarSesion()">🚪 Cerrar sesión</button>
+    </nav>
+
+    <!-- PANEL PRINCIPAL -->
+    <main class="panel-principal">
+        <!-- VENTAS -->
+        <section id="ventas" class="seccion active-section">
+            <div class="titulo-seccion">
+                <h2>VENTAS</h2>
+            </div>
+
+            <div class="tabla-tienda-contenedor">
+                <div class="encabezado-tienda">
+                    <h2>TABLA DE PRODUCTOS</h2>
+                    <div class="acciones-tienda">
+                        <div class="busqueda">
+                            <span>🔍</span>
+                            <input type="text" id="buscarTienda" placeholder="Buscar producto..." oninput="buscarProductoTienda()">
+                        </div>
+                        <button class="btn-carrito" type="button" onclick="toggleCarrito()" aria-label="Abrir carrito">
+                            🛒 <span id="contadorCarrito">0</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="tabla-scroll">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>NOMBRE</th>
+                                <th>FECHA DE CADUCIDAD</th>
+                                <th>CANTIDAD POR UNIDAD</th>
+                                <th>PRECIO POR UNIDAD</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaTienda"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- RECURSOS -->
+        <section id="recursos" class="seccion">
+            <div class="recursos-container">
+                <div class="recursos-izquierdo">
+                    <div class="recurso-bloque">
+                        <h2 id="tituloProductosVendidos">PRODUCTOS VENDIDOS EN ENERO</h2>
+                        <div class="tabla-recursos">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>PRODUCTO</th>
+                                        <th>VENDIDOS</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tablaProductos"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="recurso-bloque">
+                        <h2>MESES DE SERVICIO</h2>
+                        <div class="meses">
+                            <button onclick="cambiarMesGlobal('Enero')">Enero</button>
+                            <button onclick="cambiarMesGlobal('Febrero')">Febrero</button>
+                            <button onclick="cambiarMesGlobal('Marzo')">Marzo</button>
+                            <button onclick="cambiarMesGlobal('Abril')">Abril</button>
+                            <button onclick="cambiarMesGlobal('Mayo')">Mayo</button>
+                            <button onclick="cambiarMesGlobal('Junio')">Junio</button>
+                            <button onclick="cambiarMesGlobal('Julio')">Julio</button>
+                            <button onclick="cambiarMesGlobal('Agosto')">Agosto</button>
+                            <button onclick="cambiarMesGlobal('Septiembre')">Septiembre</button>
+                            <button onclick="cambiarMesGlobal('Octubre')">Octubre</button>
+                            <button onclick="cambiarMesGlobal('Noviembre')">Noviembre</button>
+                            <button onclick="cambiarMesGlobal('Diciembre')">Diciembre</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recursos-derecho">
+                    <div class="grafica-contenedor">
+                        <h2 id="tituloGrafica">GANANCIAS DE ENERO</h2>
+                        <div class="semanas">
+                            <button onclick="cambiarSemanaGlobal(1)">Semana 1</button>
+                            <button onclick="cambiarSemanaGlobal(2)">Semana 2</button>
+                            <button onclick="cambiarSemanaGlobal(3)">Semana 3</button>
+                            <button onclick="cambiarSemanaGlobal(4)">Semana 4</button>
+                            <button id="semana5" onclick="cambiarSemanaGlobal(5)">Semana 5</button>
+                        </div>
+                        <div class="grafica" id="grafica"></div>
+                        <div class="total">
+                            <strong>TOTAL GANANCIAS:</strong>
+                            <span id="totalGanancias">Bs 0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DEMANDA -->
+        <section id="demanda" class="seccion">
+            <div class="filtro-mes-contenedor">
+                <label for="selectMesDemanda"><strong>Filtrar por Mes:</strong></label>
+                <select id="selectMesDemanda" onchange="cambiarMesGlobal(this.value)">
+                    <option value="Enero">Enero</option>
+                    <option value="Febrero">Febrero</option>
+                    <option value="Marzo">Marzo</option>
+                    <option value="Abril">Abril</option>
+                    <option value="Mayo">Mayo</option>
+                    <option value="Junio">Junio</option>
+                    <option value="Julio">Julio</option>
+                    <option value="Agosto">Agosto</option>
+                    <option value="Septiembre">Septiembre</option>
+                    <option value="Octubre">Octubre</option>
+                    <option value="Noviembre">Noviembre</option>
+                    <option value="Diciembre">Diciembre</option>
+                </select>
+                <button class="btn-ir-hoy" onclick="irAMesYSemanaActual()">📅 Ir a mes y semana actual</button>
+            </div>
+
+            <div class="productos-demanda">
+                <div class="tabla-demanda">
+                    <h2 id="tituloDemandaProductos">DEMANDA DE PRODUCTOS</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Productos más vendidos</th>
+                                <th>Productos menos vendidos</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+                <div class="tabla-demanda">
+                    <h2>PRODUCTOS POR ABASTECER (STOCK ACTUAL)</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Productos</th>
+                                <th>Unidades</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ADMINISTRACIÓN -->
+        <section id="administracion" class="seccion">
+            <div class="admin-contenedor">
+                <div class="admin-encabezado">
+                    <h2>MODIFICAR PRODUCTOS</h2>
+                    <div class="acciones-admin">
+                        <div class="busqueda">
+                            <span>🔍</span>
+                            <input type="text" id="buscarAdmin" placeholder="Buscar producto..." oninput="buscarProductoAdmin()">
+                        </div>
+                        <button class="btn-agregar" onclick="abrirFormularioAgregar()">+ Agregar producto</button>
+                    </div>
+                </div>
+
+                <div class="tabla-general tabla-admin-scroll">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>N.°</th>
+                                <th>Producto</th>
+                                <th>Fecha de vencimiento</th>
+                                <th>Cantidad unitaria</th>
+                                <th>Precio</th>
+                                <th>Modificar</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaProductosAdmin"></tbody>
+                    </table>
+                </div>
+
+                <div class="admin-usuarios-bloque">
+                    <button type="button" class="btn-agregar-usuario-admin" onclick="abrirFormularioUsuarioAdmin()">
+                        + Agregar vendedor o administrador
+                    </button>
+
+                    <div id="formularioUsuarioAdmin" class="formulario-usuario-admin" style="display:none;">
+                        <div class="formulario-usuario-admin-contenido">
+                            <div class="acceso-icono">📝</div>
+                            <h2>Nuevo usuario</h2>
+                            <p>Crea una cuenta para utilizar el sistema</p>
+
+                            <form id="formUsuarioAdmin">
+                                <label for="adminUsuarioNombre">Nombre</label>
+                                <input type="text" id="adminUsuarioNombre" placeholder="Escribe tu nombre" required>
+
+                                <label for="adminUsuarioPassword">Contraseña</label>
+                                <input type="password" id="adminUsuarioPassword" placeholder="Crea una contraseña" required>
+
+                                <label for="adminUsuarioTipo">Tipo de usuario</label>
+                                <select id="adminUsuarioTipo" required>
+                                    <option value="">Selecciona un tipo</option>
+                                    <option value="administrador">Administrador</option>
+                                    <option value="vendedor">Vendedor</option>
+                                </select>
+
+                                <button type="submit" class="btn-ingresar">Agregar</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="tabla-general tabla-usuarios-admin">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>N°</th>
+                                    <th>Rol</th>
+                                    <th>Nombre</th>
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaUsuariosAdmin"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NOTAS DE VENTA -->
+        <section id="notasVenta" class="seccion">
+            <div class="notas-venta-contenedor">
+                <div class="notas-venta-encabezado">
+                    <div>
+                        <h2 id="tituloNotasVentaMes">NOTAS DE VENTA</h2>
+                        <p>Historial de compras realizadas en el mes seleccionado</p>
+                    </div>
+                    
+                    <div class="acciones-notas-filtro">
+                        <label for="selectMesNotas"><strong>Mes:</strong></label>
+                        <select id="selectMesNotas" onchange="cambiarMesGlobal(this.value)">
+                            <option value="Enero">Enero</option>
+                            <option value="Febrero">Febrero</option>
+                            <option value="Marzo">Marzo</option>
+                            <option value="Abril">Abril</option>
+                            <option value="Mayo">Mayo</option>
+                            <option value="Junio">Junio</option>
+                            <option value="Julio">Julio</option>
+                            <option value="Agosto">Agosto</option>
+                            <option value="Septiembre">Septiembre</option>
+                            <option value="Octubre">Octubre</option>
+                            <option value="Noviembre">Noviembre</option>
+                            <option value="Diciembre">Diciembre</option>
+                        </select>
+                        <button class="btn-ir-hoy" onclick="irAMesYSemanaActual()">📅 Mes actual</button>
+                    </div>
+
+                    <div class="contador-ventas">
+                        <span>Total de ventas (Mes)</span>
+                        <strong id="cantidadNotasVenta">0</strong>
+                    </div>
+                </div>
+
+                <div class="tabla-notas-venta">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>N.º DE VENTA</th>
+                                <th>FECHA Y HORA</th>
+                                <th>PRODUCTOS VENDIDOS</th>
+                                <th>VENTA ATRIBUIDA</th>
+                                <th>TOTAL</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaNotasVenta"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<!-- CARRITO -->
+<div id="carritoPanel" class="carrito-panel">
+    <div class="carrito-encabezado">
+        <div>
+            <h2>MI CARRITO</h2>
+            <span id="cantidadCarritoTexto">0 productos</span>
+        </div>
+        <button type="button" class="cerrar-carrito" onclick="toggleCarrito()">&times;</button>
+    </div>
+
+    <div id="carritoContenido" class="carrito-contenido">
+        <p class="carrito-vacio">El carrito está vacío.</p>
+    </div>
+
+    <div class="carrito-pie">
+        <div class="carrito-total">
+            <strong>Total:</strong>
+            <span id="totalCarrito">Bs 0.00</span>
+        </div>
+        <button type="button" class="btn-confirmar-carrito" onclick="confirmarCompra()">Confirmar compra</button>
+        <button type="button" class="btn-vaciar-carrito" onclick="vaciarCarrito()">Vaciar carrito</button>
+    </div>
+</div>
+
+<!-- MODAL PRODUCTO -->
+<div id="modal" class="modal">
+    <div class="modal-contenido">
+        <span class="cerrar" onclick="cerrarFormulario()">&times;</span>
+        <h2>Producto</h2>
+
+        <form id="formProducto">
+            <label for="producto">Nombre del producto</label>
+            <input type="text" id="producto" required>
+
+            <label for="unidad">Unidad</label>
+            <select id="unidad" required>
+                <option value="kg">kg</option>
+                <option value="g">g</option>
+                <option value="l">l</option>
+                <option value="ml">ml</option>
+                <option value="unidad">unidad</option>
+                <option value="caja">caja</option>
+                <option value="paquete">paquete</option>
+            </select>
+
+            <label for="cantidad">Cantidad</label>
+            <input type="number" id="cantidad" min="0" step="0.01" required>
+
+            <label for="fecha">Fecha de vencimiento</label>
+            <input type="date" id="fecha" required>
+
+            <label for="precio">Precio</label>
+            <input type="number" id="precio" min="0" step="0.01" required>
+
+            <button type="submit" class="btn-guardar">Guardar</button>
+            <button type="button" id="btnEliminar" class="btn-eliminar" onclick="eliminarProducto()">Eliminar</button>
+        </form>
+    </div>
+</div>
+
+<script src="script.JS"></script>
+</body>
+</html>
