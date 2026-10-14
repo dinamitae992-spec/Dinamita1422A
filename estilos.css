@@ -1,0 +1,1422 @@
+/* ESTILOS GENERALES */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f3f7f5;
+    color: #222;
+}
+
+/* PANTALLA DE INICIO */
+.pantalla-inicio {
+    position: fixed;
+    inset: 0;
+    z-index: 5000;
+    background: #f3f7f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.inicio-contenedor {
+    width: 420px;
+    max-width: 100%;
+    background: white;
+    padding: 40px 35px;
+    border-radius: 18px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.10);
+    text-align: center;
+}
+
+.inicio-logo {
+    width: 75px;
+    height: 75px;
+    margin: 0 auto 18px;
+    background: #18a878;
+    color: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.inicio-contenedor h1 {
+    font-size: 30px;
+    margin-bottom: 8px;
+    text-transform: lowercase;
+}
+
+.inicio-subtitulo {
+    color: #777;
+    margin-bottom: 28px;
+    font-size: 14px;
+}
+
+.btn-inicio {
+    width: 100%;
+    border: none;
+    padding: 14px;
+    border-radius: 9px;
+    margin-bottom: 12px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-administrador {
+    background: #18a878;
+    color: white;
+}
+
+.btn-administrador:hover {
+    background: #117e62;
+}
+
+.btn-vendedor {
+    background: #e9f8f2;
+    color: #18a878;
+    border: 1px solid #18a878;
+}
+
+.btn-vendedor:hover {
+    background: #d8f2e7;
+}
+
+.btn-nuevo-usuario {
+    width: 100%;
+    margin-top: 8px;
+    padding: 12px;
+    border: none;
+    background: transparent;
+    color: #18a878;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.btn-nuevo-usuario:hover {
+    text-decoration: underline;
+}
+
+/* MODALES DE ACCESO */
+.modal-acceso {
+    position: fixed;
+    inset: 0;
+    z-index: 6000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.45);
+    padding: 20px;
+}
+
+.acceso-contenido {
+    width: 420px;
+    max-width: 100%;
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
+    position: relative;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.acceso-icono {
+    width: 55px;
+    height: 55px;
+    margin-bottom: 15px;
+    background: #e9f8f2;
+    color: #18a878;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+}
+
+.acceso-contenido h2 {
+    margin-bottom: 7px;
+}
+
+.acceso-contenido p {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.cerrar-acceso {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    border: none;
+    background: transparent;
+    color: #777;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+#formLogin,
+#formRegistro,
+#formLoginVendedor {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#formLogin label,
+#formRegistro label,
+#formLoginVendedor label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 7px;
+}
+
+#formLogin input,
+#formRegistro input,
+#formRegistro select,
+#formLoginVendedor input {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    outline: none;
+    transition: 0.2s;
+}
+
+#formLogin input:focus,
+#formRegistro input:focus,
+#formRegistro select:focus,
+#formLoginVendedor input:focus {
+    border-color: #18a878;
+    box-shadow: 0 0 0 3px rgba(24, 168, 120, 0.12);
+}
+
+.btn-ingresar {
+    width: 100%;
+    margin-top: 15px;
+    border: none;
+    background: #18a878;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.2s;
+}
+
+.btn-ingresar:hover {
+    background: #117e62;
+    transform: translateY(-1px);
+}
+
+.btn-ingresar:active {
+    transform: translateY(0);
+}
+
+/* OCULTAR SISTEMA CUANDO NO HAY SESIÓN */
+body.sin-sesion .header,
+body.sin-sesion .sistema,
+body.sin-sesion .carrito-panel {
+    display: none;
+}
+
+/* BOTÓN CERRAR SESIÓN */
+.btn-cerrar-sesion {
+    margin-top: 20px;
+    color: #d9534f;
+}
+
+.btn-cerrar-sesion:hover {
+    background: #fff0ef;
+}
+
+/* HEADER Y DATOS DE USUARIO */
+.header {
+    height: 90px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 25px;
+    border-bottom: 1px solid #e2e2e2;
+}
+
+.logo-box {
+    width: 70px;
+    height: 70px;
+    background: #18a878;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-box span {
+    color: white;
+    font-size: 27px;
+    font-weight: bold;
+}
+
+.title-box {
+    margin-left: 18px;
+    margin-right: auto;
+}
+
+.title-box h1 {
+    font-size: 30px;
+    color: #222;
+    text-transform: lowercase;
+    letter-spacing: 1px;
+}
+
+.info-usuario-header {
+    background: #e9f8f2;
+    color: #18a878;
+    border: 1px solid #18a878;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ESTRUCTURA */
+.sistema {
+    display: flex;
+    min-height: calc(100vh - 90px);
+}
+
+/* MENÚ */
+.menu {
+    width: 220px;
+    background: white;
+    padding: 25px 15px;
+    border-right: 1px solid #e1e1e1;
+}
+
+.menu-btn {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 12px;
+    border: none;
+    border-radius: 10px;
+    background: transparent;
+    text-align: left;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.menu-btn:hover {
+    background: #e9f8f2;
+}
+
+.menu-btn.active {
+    background: #18a878;
+    color: white;
+}
+
+/* PANEL PRINCIPAL */
+.panel-principal {
+    flex: 1;
+    padding: 25px;
+    min-width: 0;
+}
+
+.seccion {
+    display: none;
+}
+
+.seccion.active-section {
+    display: block;
+}
+
+.filtro-mes-contenedor, .acciones-notas-filtro {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: white;
+    padding: 12px 18px;
+    border-radius: 10px;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.filtro-mes-contenedor select, .acciones-notas-filtro select {
+    padding: 7px 12px;
+    border: 1px solid #18a878;
+    border-radius: 6px;
+    outline: none;
+    background: white;
+    color: #222;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-ir-hoy {
+    background: #e9f8f2;
+    color: #18a878;
+    border: 1px solid #18a878;
+    padding: 7px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: 0.2s;
+}
+
+.btn-ir-hoy:hover {
+    background: #18a878;
+    color: white;
+}
+
+/* TÍTULOS */
+.titulo-seccion {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.titulo-seccion h2 {
+    font-size: 22px;
+}
+
+/* BÚSQUEDA */
+.busqueda {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 8px 12px;
+}
+
+.busqueda input {
+    border: none;
+    outline: none;
+    font-size: 14px;
+    width: 220px;
+}
+
+/* TABLA DE TIENDA */
+.tabla-tienda-contenedor {
+    background: white;
+    border-radius: 12px;
+    padding: 22px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+}
+
+.encabezado-tienda {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.encabezado-tienda h2 {
+    font-size: 20px;
+}
+
+.tabla-scroll {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #18a878;
+    color: white;
+    padding: 13px;
+    text-align: left;
+    font-size: 13px;
+}
+
+td {
+    padding: 13px;
+    border-bottom: 1px solid #eeeeee;
+    font-size: 14px;
+}
+
+tr:hover td {
+    background: #f7fbf9;
+}
+
+/* BOTÓN VENDER */
+.vender-btn {
+    background: #18a878;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    padding: 8px 15px;
+    cursor: pointer;
+}
+
+.vender-btn:hover {
+    background: #117e62;
+}
+
+.vender-btn:disabled {
+    background: #aaa;
+    cursor: not-allowed;
+}
+
+/* TABLAS GENERALES */
+.tabla-general {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    overflow-x: auto;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* TABLA ADMINISTRACIÓN CON LIMITANTE Y SCROLL */
+.tabla-admin-scroll {
+    max-height: 420px;
+    overflow-y: auto;
+    padding: 0;
+}
+
+.tabla-admin-scroll table {
+    width: 100%;
+}
+
+.tabla-admin-scroll th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+/* ADMINISTRADOR */
+.admin-contenedor {
+    background: white;
+    border-radius: 12px;
+    padding: 22px;
+}
+
+.admin-encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.admin-encabezado h2 {
+    font-size: 20px;
+}
+
+.acciones-admin {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.btn-agregar {
+    background: #18a878;
+    color: white;
+    border: none;
+    padding: 11px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-agregar:hover {
+    background: #117e62;
+}
+
+.editar-btn {
+    border: none;
+    background: #18a878;
+    color: white;
+    padding: 8px 13px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+/* MODAL PRODUCTO */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.modal-contenido {
+    width: 420px;
+    max-width: 100%;
+    background: white;
+    border-radius: 14px;
+    padding: 25px;
+    position: relative;
+}
+
+.modal-contenido h2 {
+    margin-bottom: 20px;
+}
+
+.cerrar {
+    position: absolute;
+    right: 18px;
+    top: 10px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #777;
+}
+
+#formProducto {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#formProducto label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+#formProducto input,
+#formProducto select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    outline: none;
+}
+
+#formProducto input:focus,
+#formProducto select:focus {
+    border-color: #18a878;
+}
+
+.btn-guardar {
+    margin-top: 12px;
+    border: none;
+    background: #18a878;
+    color: white;
+    padding: 11px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.btn-eliminar {
+    display: none;
+    border: none;
+    background: #d9534f;
+    color: white;
+    padding: 11px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+/* RECURSOS */
+.recursos-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 35% 65%;
+    gap: 20px;
+}
+
+.recursos-izquierdo,
+.recursos-derecho {
+    min-width: 0;
+}
+
+.recurso-bloque,
+.grafica-contenedor {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+}
+
+.recurso-bloque {
+    margin-bottom: 20px;
+}
+
+.recurso-bloque h2,
+.grafica-contenedor h2 {
+    font-size: 18px;
+    margin-bottom: 18px;
+}
+
+/* TABLA RECURSOS */
+.tabla-recursos {
+    overflow-x: auto;
+}
+
+.tabla-recursos table {
+    width: 100%;
+}
+
+.tabla-recursos th {
+    background: #18a878;
+}
+
+.tabla-recursos td {
+    padding: 12px;
+}
+
+/* MESES Y SEMANAS */
+.meses {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.meses button,
+.semanas button {
+    border: 1px solid #18a878;
+    background: white;
+    color: #18a878;
+    padding: 9px;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.meses button:hover,
+.semanas button:hover {
+    background: #e9f8f2;
+}
+
+.meses button.activo,
+.semanas button.activo {
+    background: #18a878;
+    color: white;
+}
+
+.semanas button.semana-actual-resaltada {
+    box-shadow: 0 0 0 2px #18a878;
+    font-weight: bold;
+}
+
+.semanas {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.semanas button {
+    min-width: 95px;
+}
+
+/* GRÁFICA */
+.grafica {
+    height: 390px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    gap: 12px;
+    padding: 20px 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.barra {
+    height: 350px;
+    flex: 1;
+    max-width: 75px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+}
+
+.barra-interior {
+    width: 100%;
+    max-height: 300px;
+    min-height: 0;
+    background: #18a878;
+    border-radius: 7px 7px 0 0;
+    transition: height 0.4s ease;
+}
+
+.barra .valor {
+    font-size: 11px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.barra small {
+    margin-top: 8px;
+    font-size: 12px;
+}
+
+/* TOTAL */
+.total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    font-size: 17px;
+}
+
+.total span {
+    color: #18a878;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* PRODUCTOS DEMANDA */
+.productos-demanda {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    align-items: flex-start;
+}
+
+.tabla-demanda {
+    background: white;
+    width: 100%;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+.tabla-demanda h2 {
+    text-align: center;
+    font-size: 21px;
+    margin-bottom: 20px;
+}
+
+.tabla-demanda table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla-demanda th {
+    background: #18a878;
+    color: white;
+    padding: 14px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.tabla-demanda td {
+    padding: 13px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    font-size: 15px;
+}
+
+.tabla-demanda tbody tr:hover {
+    background: #f0f8f5;
+}
+
+/* CARRITO */
+.acciones-tienda {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-carrito {
+    position: relative;
+    width: 48px;
+    height: 42px;
+    border: none;
+    border-radius: 8px;
+    background: #18a878;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-carrito:hover {
+    background: #128c66;
+}
+
+#contadorCarrito {
+    position: absolute;
+    top: -7px;
+    right: -7px;
+    min-width: 20px;
+    height: 20px;
+    padding: 2px 5px;
+    border-radius: 50%;
+    background: #222;
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carrito-panel {
+    position: fixed;
+    top: 90px;
+    right: 0;
+    width: 380px;
+    height: calc(100vh - 90px);
+    background: white;
+    border-left: 1px solid #ddd;
+    box-shadow: -5px 0 18px rgba(0, 0, 0, 0.10);
+    z-index: 1000;
+    display: none;
+    flex-direction: column;
+}
+
+.carrito-panel.abierto {
+    display: flex;
+}
+
+.carrito-encabezado {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.carrito-encabezado h2 {
+    font-size: 20px;
+    margin-bottom: 4px;
+}
+
+.carrito-encabezado span {
+    color: #777;
+    font-size: 13px;
+}
+
+.cerrar-carrito {
+    width: 34px;
+    height: 34px;
+    border: none;
+    border-radius: 7px;
+    background: #f1f1f1;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.carrito-contenido {
+    flex: 1;
+    overflow-y: auto;
+    padding: 15px;
+}
+
+.carrito-vacio {
+    text-align: center;
+    color: #777;
+    padding: 40px 10px;
+}
+
+.item-carrito {
+    padding: 14px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.item-carrito-superior {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.item-carrito-nombre {
+    font-weight: bold;
+}
+
+.item-carrito-precio {
+    white-space: nowrap;
+    color: #18a878;
+    font-weight: bold;
+}
+
+.item-carrito-controles {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.control-cantidad {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.control-cantidad button {
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 6px;
+    background: #e9f8f2;
+    color: #18a878;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.control-cantidad button:hover {
+    background: #d5f1e6;
+}
+
+.control-cantidad input {
+    width: 48px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    outline: none;
+}
+
+.btn-eliminar-carrito {
+    border: none;
+    background: transparent;
+    color: #d33;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.carrito-pie {
+    padding: 18px;
+    border-top: 1px solid #e5e5e5;
+    background: white;
+}
+
+.carrito-total {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    font-size: 17px;
+}
+
+.carrito-total span {
+    color: #18a878;
+    font-weight: bold;
+}
+
+.btn-confirmar-carrito,
+.btn-vaciar-carrito {
+    width: 100%;
+    padding: 11px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 7px;
+}
+
+.btn-confirmar-carrito {
+    background: #18a878;
+    color: white;
+}
+
+.btn-confirmar-carrito:hover {
+    background: #128c66;
+}
+
+.btn-vaciar-carrito {
+    background: #f0f0f0;
+    color: #333;
+}
+
+.btn-vaciar-carrito:hover {
+    background: #e4e4e4;
+}
+
+/* NOTAS DE VENTA */
+.notas-venta-contenedor {
+    width: 100%;
+    background: white;
+    border-radius: 12px;
+    padding: 22px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+}
+
+.notas-venta-encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.notas-venta-encabezado h2 {
+    font-size: 21px;
+    margin-bottom: 5px;
+}
+
+.notas-venta-encabezado p {
+    color: #777;
+    font-size: 14px;
+}
+
+.contador-ventas {
+    background: #e9f8f2;
+    border-radius: 10px;
+    padding: 12px 18px;
+    text-align: center;
+}
+
+.contador-ventas span {
+    display: block;
+    color: #666;
+    font-size: 12px;
+    margin-bottom: 4px;
+}
+
+.contador-ventas strong {
+    color: #18a878;
+    font-size: 22px;
+}
+
+.tabla-notas-venta {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.tabla-notas-venta table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla-notas-venta th {
+    background: #18a878;
+    color: white;
+    padding: 13px;
+    text-align: left;
+    font-size: 13px;
+}
+
+.tabla-notas-venta td {
+    padding: 13px;
+    border-bottom: 1px solid #eeeeee;
+    font-size: 14px;
+    vertical-align: top;
+}
+
+.numero-venta {
+    font-weight: bold;
+    color: #18a878;
+}
+
+.vendedor-nota {
+    font-weight: bold;
+    color: #333;
+    display: inline-block;
+    background: #e9f8f2;
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid #18a878;
+}
+
+.productos-nota {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.producto-nota {
+    padding: 6px 8px;
+    background: #f3f7f5;
+    border-radius: 6px;
+}
+
+.total-nota {
+    color: #18a878;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.sin-notas {
+    text-align: center;
+    color: #777;
+    padding: 30px !important;
+}
+
+/* ADMINISTRACIÓN DE USUARIOS */
+.admin-usuarios-bloque {
+    margin-top: 28px;
+    border-top: 1px solid #eeeeee;
+    padding-top: 25px;
+}
+
+.btn-agregar-usuario-admin {
+    width: 100%;
+    border: none;
+    background: #18a878;
+    color: white;
+    padding: 12px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.2s;
+    margin-bottom: 18px;
+}
+
+.btn-agregar-usuario-admin:hover {
+    background: #117e62;
+    transform: translateY(-1px);
+}
+
+.formulario-usuario-admin {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.formulario-usuario-admin-contenido {
+    width: 420px;
+    max-width: 100%;
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
+    position: relative;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.10);
+}
+
+.formulario-usuario-admin-contenido h2 {
+    margin-bottom: 7px;
+}
+
+.formulario-usuario-admin-contenido p {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.formulario-usuario-admin-contenido form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.formulario-usuario-admin-contenido label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 7px;
+}
+
+.formulario-usuario-admin-contenido input,
+.formulario-usuario-admin-contenido select {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    outline: none;
+    transition: 0.2s;
+}
+
+.formulario-usuario-admin-contenido input:focus,
+.formulario-usuario-admin-contenido select:focus {
+    border-color: #18a878;
+    box-shadow: 0 0 0 3px rgba(24, 168, 120, 0.12);
+}
+
+.botones-form-admin {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.botones-form-admin .btn-ingresar {
+    margin-top: 0;
+    flex: 1;
+}
+
+.btn-cancelar-admin {
+    flex: 1;
+    border: none;
+    background: #f0f0f0;
+    color: #333;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.2s;
+}
+
+.btn-cancelar-admin:hover {
+    background: #e4e4e4;
+}
+
+.tabla-usuarios-admin {
+    margin-top: 10px;
+}
+
+.tabla-usuarios-admin th {
+    background: #18a878;
+}
+
+.btn-eliminar-usuario-admin {
+    border: none;
+    background: #d9534f;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.btn-eliminar-usuario-admin:hover {
+    background: #c9302c;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1000px) {
+    .recursos-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 800px) {
+    .menu {
+        width: 180px;
+    }
+
+    .panel-principal {
+        padding: 18px;
+    }
+
+    .titulo-seccion,
+    .encabezado-tienda,
+    .admin-encabezado {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .busqueda {
+        width: 100%;
+    }
+
+    .busqueda input {
+        width: 100%;
+    }
+
+    .productos-demanda {
+        grid-template-columns: 1fr;
+    }
+
+    .notas-venta-encabezado {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 600px) {
+    .inicio-contenedor {
+        padding: 30px 22px;
+    }
+
+    .acceso-contenido {
+        padding: 25px 20px;
+    }
+
+    .header {
+        height: auto;
+        padding: 12px 15px;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .logo-box {
+        width: 50px;
+        height: 50px;
+    }
+
+    .title-box h1 {
+        font-size: 22px;
+    }
+
+    .info-usuario-header {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+
+    .sistema {
+        flex-direction: column;
+    }
+
+    .menu {
+        width: 100%;
+        display: flex;
+        overflow-x: auto;
+        gap: 8px;
+        padding: 10px;
+    }
+
+    .menu-btn {
+        min-width: 145px;
+        margin: 0;
+    }
+
+    .btn-cerrar-sesion {
+        margin-top: 0;
+    }
+
+    .panel-principal {
+        padding: 12px;
+    }
+
+    .meses {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .semanas {
+        flex-wrap: wrap;
+    }
+
+    .grafica {
+        gap: 5px;
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+
+    .barra {
+        max-width: 45px;
+    }
+
+    .barra-interior {
+        width: 80%;
+    }
+
+    .barra small {
+        font-size: 10px;
+    }
+
+    .total {
+        font-size: 14px;
+    }
+
+    .total span {
+        font-size: 17px;
+    }
+
+    .carrito-panel {
+        width: 100%;
+    }
+
+    .acciones-tienda {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+    .busqueda input {
+        width: 170px;
+    }
+}
