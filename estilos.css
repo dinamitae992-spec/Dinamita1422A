@@ -270,7 +270,7 @@ body.sin-sesion .carrito-panel {
 .title-box h1 {
     font-size: 30px;
     color: #222;
-    text-transform: lowercase;
+    
     letter-spacing: 1px;
 }
 
@@ -430,6 +430,7 @@ body.sin-sesion .carrito-panel {
 }
 
 table {
+    border: 1px solid #000;
     width: 100%;
     border-collapse: collapse;
 }
@@ -443,6 +444,7 @@ th {
 }
 
 td {
+    border: 1px solid;
     padding: 13px;
     border-bottom: 1px solid #eeeeee;
     font-size: 14px;
@@ -487,7 +489,7 @@ tr:hover td {
     padding: 0;
 }
 
-.tabla-admin-scroll table {
+.tabla-admin-scroll title-box {
     width: 100%;
 }
 
@@ -661,7 +663,7 @@ tr:hover td {
     overflow-x: auto;
 }
 
-.tabla-recursos table {
+.tabla-recursos title-box {
     width: 100%;
 }
 
