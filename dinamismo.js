@@ -128,7 +128,7 @@ function iniciarSistema(tipo) {
     document.body.classList.remove("sin-sesion");
     configurarPermisos(tipo);
 
-    const seccionVentas = document.getElementById("ventas");
+    const seccionVentas = document.getElementById("ventadeproductos");
     const botones = document.querySelectorAll(".menu-btn");
 
     document.querySelectorAll(".seccion").forEach(seccion => {
@@ -143,7 +143,7 @@ function iniciarSistema(tipo) {
         seccionVentas.classList.add("active-section");
     }
 
-    const botonVentas = [...botones].find(boton => boton.textContent.includes("Ventas"));
+    const botonVentas = [...botones].find(boton => boton.textContent.includes("GESTION DE PRODUCTOS"));
     if (botonVentas) {
         botonVentas.classList.add("active");
     }
@@ -611,7 +611,7 @@ function mostrarProductosVendidos() {
 }
 
 function actualizarDemanda() {
-    const seccion = document.querySelector("#demanda");
+    const seccion = document.querySelector("#reportes");
     if (!seccion) return;
 
     const tituloDemanda = document.getElementById("tituloDemandaProductos");
