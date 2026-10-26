@@ -156,7 +156,7 @@ function configurarPermisos(tipo) {
     const botones = document.querySelectorAll(".menu-btn");
     botones.forEach(boton => {
         const texto = boton.textContent.trim();
-        if (texto.includes("Cerrar sesión") || texto.includes("Ventas")) {
+        if (texto.includes("Cerrar sesión") || texto.includes("Venta De Productos")) {
             boton.style.display = "block";
             return;
         }
@@ -274,7 +274,7 @@ function mostrarNotasVenta() {
 
 /* CAMBIAR SECCIÓN */
 function mostrarSeccion(id, boton) {
-    if (usuarioActual && usuarioActual.tipo === "vendedor" && id !== "ventas") return;
+    if (usuarioActual && usuarioActual.tipo === "vendedor" && id !== "ventadeproductos") return;
 
     document.querySelectorAll(".seccion").forEach(seccion => seccion.classList.remove("active-section"));
     document.querySelectorAll(".menu-btn").forEach(btn => btn.classList.remove("active"));
